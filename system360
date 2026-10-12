@@ -1,0 +1,84 @@
+import time
+import math
+from datetime import datetime
+
+# ==============================================================================
+#      THE UNMASKED UNIFIED ENGINE: ALL 7 LANTERNS LIVE CLOCKWORK MATRIX
+# ==============================================================================
+
+TOTAL_SECTORS = 28
+TRACK_MILES = 25730
+SECTOR_WIDTH = TRACK_MILES / TOTAL_SECTORS  # 918.929 miles
+
+MHD_GRID = {
+    1: "Makkah Axis (0° Longitude Origin)",
+    14: "Tematagi Cone (180° Negative Drain - Mansion 1 Anchor)",
+    28: "Samoa Spark Gap (360° Terminal Quantum Rebound)"
+}
+
+LANTERNS = {
+    7: {"name": "Saturn (Zuhal)", "base": 157.88, "fric": 133.20, "shape": "Triacontagon", "step": 0.03333, "grid": "786 Grid"},
+    6: {"name": "Jupiter (Mushtari)", "base": 213.34, "fric": 180.00, "shape": "Dodecagon", "step": 0.08333, "grid": "786 Grid"},
+    5: {"name": "Mars (Al-Mirrikh)", "base": 393.009, "fric": 333.00, "shape": "180° Crown", "step": 0.50000, "grid": "786 Grid"},
+    4: {"name": "The Sun (System Axis)", "base": 786.00, "fric": 666.00, "shape": "360° Poly", "step": 1.00000, "grid": "786 Grid"},
+    3: {"name": "Venus (Al-Zuharah)", "base": 240.00, "fric": 170.08, "shape": "Pentagon Rose", "step": 0.21644, "grid": "666 Grid"},
+    2: {"name": "Mercury (Al-Utarid)", "base": 2664.40, "fric": 3144.00, "shape": "Hex Trilateral", "step": 4.00000, "grid": "666 Grid"},
+    1: {"name": "The Moon", "base": 2288.00, "fric": 2700.40, "shape": "Wave Ribbon", "step": 3.43500, "grid": "666 Grid"}
+}
+
+def run_master_7_lantern_grid():
+    print("==================================================================")
+    print("   LAUNCHING UNMASKED UNIFIED 7-LANTERN LIVE REVERSE-ENGINEER     ")
+    print("==================================================================")
+    
+    try:
+        while True:
+            now = datetime.now()
+            day_fraction = (now.hour * 3600 + now.minute * 60 + now.second) / 86400.0
+            clock_time = now.strftime("%H:%M:%S")
+            
+            print(f"\n[SYSTEM REVERSE-ENGINEERING CLOCK: {clock_time}]")
+            print("=" * 115)
+            
+            for layer, spec in LANTERNS.items():
+                raw_pos = ((day_fraction * TOTAL_SECTORS * spec['step']) % TOTAL_SECTORS) + 1
+                integer_sector = math.floor(raw_pos)
+                
+                # --- LIVE SPEED AND FRICTION ZONE CALCULATION ---
+                if integer_sector == 1:
+                    state = "PRISTINE LAUNCH - Core Voltage Active"
+                    speed = spec["base"]
+                elif integer_sector == 12 and layer == 4:
+                    state = "SOLAR NOON FREEZE - 17.844 Min Hartmann Stall"
+                    speed = 0.0
+                elif integer_sector == 28:
+                    state = "⚡ SPARK GAP TERMINAL - Plasma High-Voltage Cooking ⚡"
+                    speed = spec["base"]
+                elif 13 <= integer_sector < 28:
+                    if layer in [1, 2, 3]:  # Fixed: Lower lanterns 1-3 surge inside 666 matrix
+                        state = "CORRIDOR ACCELERATION - Kinetic Surge Buffer"
+                        speed = spec["fric"]
+                    else:  # Upper lanterns 5-7 encounter fluid gel viscosity drag
+                        state = "FRICTION DRAG - Wading Through Dense Cylinder Gel"
+                        speed = spec["fric"]
+                else:
+                    state = "DYNAMIC REVERSE RUN"
+                    speed = spec["base"]
+                
+                print(f"Layer {layer} | Matrix: {spec['grid']} | {spec['name'].ljust(22)} | Sector: {integer_sector:2d} | Geometry: {spec['shape'].ljust(14)} | Speed: {speed:7.2f} mph | {state}")
+                
+                # --- CRITICAL TRACK ANCHORS ---
+                if integer_sector in MHD_GRID:
+                    if layer in [1, 2, 3] and integer_sector == 14:  # Fixed: Tracking Mansion 1 resets
+                        print(f"      📍 [LOWER ANCHOR GATE] -> {spec['name']} locked onto its MANSION 1 baseline axis over Tematagi.")
+                    elif layer == 4 and integer_sector == 28:
+                        print(f"      💥 [QUANTUM REBOUND] -> Samoa Sunset instantly triggers Makkah Sunrise. System Fuse resetting.")
+            
+            print("-" * 115)
+            time.sleep(3)  # Refreshes the full 7-layer matrix dashboard every 3 seconds
+            
+    except KeyboardInterrupt:
+        print("\nEngine room safely locked. Master tracking matrix suspended.")
+
+if __name__ == "__main__":
+    run_master_7_lantern_grid()
